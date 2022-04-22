@@ -234,6 +234,9 @@ class AI:
                             if F_n < F:
                                 self.previous[n] = current
                                 self.frontier[i] = (F_n, n)
+
+                                # re-establish the heap property!
+                                heapify(self.frontier)
                             break
 
                     # Last case: unexplored
@@ -249,7 +252,7 @@ class AI:
     def H(self, n):
         # Defined as Manhattan distance to goal, downweighted to not be considered 
         # equal to actual distance G(.) in some edge cases
-        return 0.95 * manhattan_dist(n, self.grid.goal)
+        return manhattan_dist(n, self.grid.goal)
 
 # Manhattan distance
 def manhattan_dist(n1, n2):
